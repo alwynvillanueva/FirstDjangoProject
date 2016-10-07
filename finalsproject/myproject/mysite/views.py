@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.template.loader import get_template
 from django.core.mail import EmailMessage
 from django.template import Context
+from django.db.models import F
 
 def index(request):
 	tip_list=Tips.objects.all().order_by('-date_added')
@@ -91,4 +92,10 @@ def submitguide(request):
 	return render(request,'submit.html', {'form':form})
 def postdelete(request,id=None):
 	Tips.objects.filter(id=id).delete()
+	return HttpResponseRedirect('/mysite/home/')
+def likebtn(request,id=None):
+	Tips.objects.filter(id=id).update(likes=F('likes')+1)
+	return HttpResponseRedirect('/mysite/home/')
+def dislikebtn(request,id=None):
+	Tips.objects.filter(id=id).update(dislikes=F('dislikes')+1)
 	return HttpResponseRedirect('/mysite/home/')
