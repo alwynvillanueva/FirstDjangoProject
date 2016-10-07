@@ -72,7 +72,25 @@
 <div class="wrapper">
   
   <div class="table">
+
+    <div class="row header black">
+      <div class="cell">
     
+      </div>
+    
+      <div class="cell">
+        Sort by:
+        <a href="{% url 'mysite:index'%}">Date Added</a>
+        /
+        <a href="{% url 'mysite:orderbylikes'%}">Likes</a>
+        /
+        <a href="{% url 'mysite:orderbydislikes'%}">Dislikes</a>
+        /
+        <a href="{% url 'mysite:orderbytitle'%}">Title</a>
+        /
+        <a href="{% url 'mysite:orderbyauthor'%}">Author</a>
+      </div>
+    </div>
     <div class="row header blue">
       <div class="cell">
         #
@@ -86,12 +104,13 @@
       <div class="cell cell-no">
       <a href="#{{m.id}}" data-toggle="modal">{{m.id}}  </a>
       </div>
-      <div class="cell clickable">
+      <div class="cell ">
       <a href="#{{m.id}}" data-toggle="modal">{{m.title}} <br><div class="author"> by: {{m.author}} on {{m.date_added}} </div> 
-      <div class="LD">
-      <span class="glyphicon glyphicon-thumbs-up"> {{m.likes}} <span class="glyphicon glyphicon-thumbs-down"></span> {{m.dislikes}}
-      </div>
       </a>
+      <div class="LD">
+      <span class="glyphicon glyphicon-thumbs-up" ></span><span class="likes"> {{m.likes}} </span> <span class="glyphicon glyphicon-thumbs-down"></span><span class=" dislikes"> {{m.dislikes}} </span> 
+      </div>
+      
       </div>
     </div>
 
@@ -107,10 +126,7 @@
               <div class="modal-title titlesmodal" id="{{m.title}}">
                 {{m.title}}
               <div class="authordatemodal">By: <u class="authorunderline">{{m.author}}</u> on {{m.date_added}}</div>
-               <div class="LDmodal">
-                <button type="submit"class="btn btn-primary btn-lg outline"><span class="glyphicon glyphicon-thumbs-up"></button>: {{m.likes}}
-                <button type="submit" class="btn btn-primary btn-lg outline"><span class="glyphicon glyphicon-thumbs-down"></button>: {{m.dislikes}}
-                </div>
+               
               </div>
             </div>
             <div class="modal-body">
@@ -127,9 +143,21 @@
                 <form action="{% url 'mysite:deletepost' id=m.id %}">                     
                 <button type="submit">Delete</button>
                 </form>
+                <div class="ratingModal">
+                    <center>
+                    <h5>Do you like this guide?</h5>
+                    <form class="LDmodal">
+                    <a href=""><span class="glyphicon glyphicon-thumbs-up"></a> <span class="likes">{{m.likes}}</span>
+                    <a href=""><span class="glyphicon glyphicon-thumbs-down"></a> <span class="dislikes">{{m.dislikes}}</span>
+                    </form>
+                    </center>
+                </div>
+                <br>
+                <center>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 <br>
                 <div class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+                </center>
             </div>
             <div class="modal-footer">
               <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="3"></div>
