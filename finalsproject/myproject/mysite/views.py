@@ -18,6 +18,50 @@ def index(request):
 	except EmptyPage:
 		tip=paginator.page(paginator.num_pages)
 	return (render(request,'index.html',{'message':tip}))
+def orderbylikes(request):
+	tip_list=Tips.objects.all().order_by('-likes')
+	paginator=Paginator(tip_list,15)
+	page = request.GET.get('page')
+	try:
+		tip=paginator.page(page)
+	except PageNotAnInteger:
+		tip=paginator.page(1)
+	except EmptyPage:
+		tip=paginator.page(paginator.num_pages)
+	return (render(request,'index.html',{'message':tip}))
+def orderbytitle(request):
+	tip_list=Tips.objects.all().order_by('title')
+	paginator=Paginator(tip_list,15)
+	page = request.GET.get('page')
+	try:
+		tip=paginator.page(page)
+	except PageNotAnInteger:
+		tip=paginator.page(1)
+	except EmptyPage:
+		tip=paginator.page(paginator.num_pages)
+	return (render(request,'index.html',{'message':tip}))
+def orderbydislikes(request):
+	tip_list=Tips.objects.all().order_by('-dislikes')
+	paginator=Paginator(tip_list,15)
+	page = request.GET.get('page')
+	try:
+		tip=paginator.page(page)
+	except PageNotAnInteger:
+		tip=paginator.page(1)
+	except EmptyPage:
+		tip=paginator.page(paginator.num_pages)
+	return (render(request,'index.html',{'message':tip}))
+def orderbyauthor(request):
+	tip_list=Tips.objects.all().order_by('author')
+	paginator=Paginator(tip_list,15)
+	page = request.GET.get('page')
+	try:
+		tip=paginator.page(page)
+	except PageNotAnInteger:
+		tip=paginator.page(1)
+	except EmptyPage:
+		tip=paginator.page(paginator.num_pages)
+	return (render(request,'index.html',{'message':tip}))
 
 def contact(request):
 	form_class = contactus

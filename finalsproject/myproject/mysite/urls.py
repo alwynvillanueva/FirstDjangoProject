@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from . import views
-from .views import postdelete
+from .views import postdelete,orderbylikes,orderbydislikes,orderbytitle,orderbyauthor
 app_name="mysite"
 urlpatterns = [
 
     url(r'^home/$',views.index,name='index'),
     url(r'^contact/$',views.contact,name='contact'),
     url(r'^submitguide/$',views.submitguide,name='submitguide'),
-    url(r'^(?P<id>\d+)/delete$',postdelete,name='deletepost')
+    url(r'^(?P<id>\d+)/delete$',postdelete,name='deletepost'),
+    url(r'^orderbylikes/$',orderbylikes,name='orderbylikes'),
+    url(r'^orderbytitle/$',orderbytitle,name='orderbytitle'),
+    url(r'^orderbyauthor/$',orderbyauthor,name='orderbyauthor'),
+    url(r'^orderbydislikes/$',orderbydislikes,name='orderbydislikes'),
 ]
 

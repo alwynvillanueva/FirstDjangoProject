@@ -19,18 +19,27 @@ footer{
   font-smoothing: antialiased;
   background: #2b2b2b
 }
+.ratingModal{
+  color: #000000;
+}
 .myimage{
   height: 90%;
   width: 100%;
 }
 .LD{
   color:#3b3b3b;
-  font-size: 12px;
-  padding-left: 10px;
+  font-size: 15px;
+  padding-left: 20px;
 }
 .LDmodal{
-  color:#ffffff;
-  font-size: 15px;
+
+  font-size: 20px;
+}
+.likes{
+  color: #14D100;
+}
+.dislikes{
+  color:#FD0006;
 }
 .formsclass{
   padding:10px;
@@ -145,6 +154,9 @@ transition-duration: 1s;
 }
 .row.green {
   background: #27ae60;
+}
+.row.black{
+  background: #000000;
 }
 .row.blue {
   background: #2980b9;
