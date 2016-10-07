@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   <title>Tricksters</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'mysite/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mysite/css/table.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+
+    <!-- Navigation -->
+    <nav class="nav navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url 'mysite:index' %}">
+                    <i class="fa fa-play-circle"></i> <span class="light">Tricksters</span> 
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#"></a>
+                    </li>
+                    <li  >
+                        <a class="page-scroll" href="{% url 'mysite:index' %}">All tips</a>
+                    </li>
+                    <li class="activenav">
+                        <a class="page-scroll" href="{% url 'mysite:contact' %}">Contact Us</a>
+                    </li>
+                    <li>
+                         <a class="page-scroll" href="{% url 'mysite:submitguide' %}">Submit Guide</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+{% load widget_tweaks %}
+<div class="homeimage">
+<img src="{% static 'mysite/images/placeholder.png' %}" class="myimage">
+</div>
+<div class="table">
+<div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form action="" method="post">
+          <h2>Contact Us</h2>
+          {% csrf_token %}
+          <br>
+          {{form.name|add_class:'form-control'|attr:'Placeholder:Name'}}<br>
+          {{form.email|add_class:'form-control'|attr:'Placeholder:Email'}}<br>
+          {{form.content|add_class:'form-control'|attr:'Placeholder:Content'}}<br>
+          
+          
+          
+          <button type="submit" class="btn btn-primary btn-lg outline">Submit</button>
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+</div>
+</div>
+
+
+
+<center>	     
+ <footer class="webfoot">
+	        <p>&copy; 2016 Company, Inc.</p>
+ </footer>
+</center>
+
+   
+  </body>
+ <script src="{% static 'mysite/js/jquery.js' %}"></script>
+ <script src="{% static 'mysite/js/bootstrap.min.js' %}"></script>
+</html>

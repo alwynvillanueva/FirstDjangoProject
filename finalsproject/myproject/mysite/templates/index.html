@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   <title>Tricksters</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'mysite/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'mysite/css/table.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+ <!--need for fb plugin-->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+          <!--end fb plugin-->
+    <!-- Navigation -->
+    <nav class="nav navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="{% url 'mysite:index' %}">
+                    <i class="fa fa-play-circle"></i> <span class="light">Tricksters</span> 
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        
+                    </li>
+                    <li  class="activenav">
+                       <a class="page-scroll" href="{% url 'mysite:index' %}">All tips</a>
+                    </li>
+                    <li>
+                         <a class="page-scroll" href="{% url 'mysite:contact' %}">Contact Us</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="{% url 'mysite:submitguide' %}">Submit Guide</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+
+<div class="homeimage">
+<img src="{% static 'mysite/images/placeholder.png' %}" class="myimage"><img>
+</div>
+
+    
+
+  <!--Main TABLE-->
+<div class="wrapper">
+  
+  <div class="table">
+    
+    <div class="row header blue">
+      <div class="cell">
+        #
+      </div>
+      <div class="cell">
+        Tips and Tricks
+      </div>
+    </div>
+     {% for m in message %}
+    <div class="row">
+      <div class="cell cell-no">
+      <a href="#{{m.id}}" data-toggle="modal">{{m.id}}  </a>
+      </div>
+      <div class="cell clickable">
+      <a href="#{{m.id}}" data-toggle="modal">{{m.title}} <br><div class="author"> by: {{m.author}} on {{m.date_added}} </div> 
+      <div class="LD">
+      <span class="glyphicon glyphicon-thumbs-up"> {{m.likes}} <span class="glyphicon glyphicon-thumbs-down"></span> {{m.dislikes}}
+      </div>
+      </a>
+      </div>
+    </div>
+
+
+<!-- Modal -->
+      <div class="modal fade modalmods" id="{{m.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header hmod-bg">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-title titlesmodal" id="{{m.title}}">
+                {{m.title}}
+              <div class="authordatemodal">By: <u class="authorunderline">{{m.author}}</u> on {{m.date_added}}</div>
+               <div class="LDmodal">
+                <button type="submit"class="btn btn-primary btn-lg outline"><span class="glyphicon glyphicon-thumbs-up"></button>: {{m.likes}}
+                <button type="submit" class="btn btn-primary btn-lg outline"><span class="glyphicon glyphicon-thumbs-down"></button>: {{m.dislikes}}
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+             
+              <p>
+              {% if m.imgdesc %}
+              <img class="img-responsive"src="{{m.imgdesc.url}}">
+              {% endif %}
+              <div class="desc">
+              <p>{{m.desc}}</p>
+              </div>
+            </p>
+            <hr>
+                <form action="{% url 'mysite:deletepost' id=m.id %}">                     
+                <button type="submit">Delete</button>
+                </form>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <br>
+                <div class="fb-share-button" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+            </div>
+            <div class="modal-footer">
+              <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+<center>
+  <!--pagination -->
+<div class="pagination mypagination">
+    <span class="step-links">
+        {% if message.has_previous %}
+            <a href="?page={{ message.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ message.number }} of {{ message.paginator.num_pages }}.
+        </span>
+
+        {% if  message.has_next %}
+            <a href="?page={{ message.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+</div>  </center>
+</div>   
+
+
+
+<center>	     
+ <footer class="webfoot">
+	        <p>&copy; 2016 Company, Inc.</p>
+ </footer>
+</center>
+
+   
+  </body>
+ <script src="{% static 'mysite/js/jquery.js' %}"></script>
+ <script src="{% static 'mysite/js/bootstrap.min.js' %}"></script>
+</html>
