@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from . import views
-from .views import postdelete,orderbylikes,orderbydislikes,orderbytitle,orderbyauthor
+from .views import postdelete,orderbylikes,orderbydislikes,orderbytitle,orderbyauthor,likebtn,dislikebtn
 app_name="mysite"
 urlpatterns = [
 
@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^contact/$',views.contact,name='contact'),
     url(r'^submitguide/$',views.submitguide,name='submitguide'),
     url(r'^(?P<id>\d+)/delete$',postdelete,name='deletepost'),
+    url(r'^(?P<id>\d+)/liked$',likebtn,name='likebtn'),
+    url(r'^(?P<id>\d+)/disliked$',dislikebtn,name='dislikebtn'),
     url(r'^orderbylikes/$',orderbylikes,name='orderbylikes'),
     url(r'^orderbytitle/$',orderbytitle,name='orderbytitle'),
     url(r'^orderbyauthor/$',orderbyauthor,name='orderbyauthor'),

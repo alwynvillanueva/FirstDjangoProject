@@ -108,7 +108,16 @@
       <a href="#{{m.id}}" data-toggle="modal">{{m.title}} <br><div class="author"> by: {{m.author}} on {{m.date_added}} </div> 
       </a>
       <div class="LD">
-      <span class="glyphicon glyphicon-thumbs-up" ></span><span class="likes"> {{m.likes}} </span> <span class="glyphicon glyphicon-thumbs-down"></span><span class=" dislikes"> {{m.dislikes}} </span> 
+      <a href="{% url 'mysite:likebtn' id=m.id %}">
+        <span class="glyphicon glyphicon-thumbs-up" ></span>
+      </a>
+        <span class="likes"> {{m.likes}} 
+        </span>
+      <a href="{% url 'mysite:dislikebtn' id=m.id %}">
+      <span class="glyphicon glyphicon-thumbs-down"></span>
+      </a>
+        <span class=" dislikes"> {{m.dislikes}} 
+        </span> 
       </div>
       
       </div>
@@ -146,10 +155,10 @@
                 <div class="ratingModal">
                     <center>
                     <h5>Do you like this guide?</h5>
-                    <form class="LDmodal">
-                    <a href=""><span class="glyphicon glyphicon-thumbs-up"></a> <span class="likes">{{m.likes}}</span>
-                    <a href=""><span class="glyphicon glyphicon-thumbs-down"></a> <span class="dislikes">{{m.dislikes}}</span>
-                    </form>
+                    <div class="LDmodal">
+                      <a href="{% url 'mysite:likebtn' id=m.id %}"><span class="glyphicon glyphicon-thumbs-up" id="#{{m.id}}"></a> <span class="likes">{{m.likes}}</span>
+                      <a href="{% url 'mysite:dislikebtn' id=m.id %}"><span class="glyphicon glyphicon-thumbs-down"></a> <span class="dislikes">{{m.dislikes}}</span>
+                    </div>
                     </center>
                 </div>
                 <br>
