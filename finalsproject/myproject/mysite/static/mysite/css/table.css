@@ -19,6 +19,15 @@ footer{
   font-smoothing: antialiased;
   background: #2b2b2b
 }
+
+.logincont{
+  width: 30%;
+  background-color: #ffffff;  
+  padding:10px;
+}
+.maincont{
+  padding-top: 200px;
+}
 .ratingModal{
   color: #000000;
 }
@@ -160,6 +169,12 @@ transition-duration: 1s;
 }
 .row.blue {
   background: #2980b9;
+}
+.adminview{
+  color:#ffffff;
+  text-align: right;
+  padding-right: 50px;
+  padding-top: 50px;
 }
 @media screen and (max-width: 580px) {
   .row {

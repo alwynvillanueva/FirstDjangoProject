@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Tips
+
 class newguide(ModelForm):
 	class Meta:
 		model = Tips
@@ -17,4 +18,3 @@ class contactus(forms.Form):
         required=True,
         widget=forms.Textarea
     )
-	

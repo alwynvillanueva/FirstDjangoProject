@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from . import views
-from .views import postdelete,orderbylikes,orderbydislikes,orderbytitle,orderbyauthor,likebtn,dislikebtn
+
+from .views import postdelete,orderbylikes,orderbydislikes,orderbytitle,orderbyauthor,likebtn,dislikebtn,oldest
 app_name="mysite"
 urlpatterns = [
 
@@ -29,5 +30,7 @@ urlpatterns = [
     url(r'^orderbytitle/$',orderbytitle,name='orderbytitle'),
     url(r'^orderbyauthor/$',orderbyauthor,name='orderbyauthor'),
     url(r'^orderbydislikes/$',orderbydislikes,name='orderbydislikes'),
+    url(r'^oldest/$',oldest,name='oldest'),
+    
 ]
 
