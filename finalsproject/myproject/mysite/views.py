@@ -8,8 +8,20 @@ from django.core.mail import EmailMessage
 from django.template import Context
 from django.db.models import F
 
+
 def index(request):
 	tip_list=Tips.objects.all().order_by('-date_added')
+	paginator=Paginator(tip_list,15)
+	page = request.GET.get('page')
+	try:
+		tip=paginator.page(page)
+	except PageNotAnInteger:
+		tip=paginator.page(1)
+	except EmptyPage:
+		tip=paginator.page(paginator.num_pages)
+	return (render(request,'index.html',{'message':tip}))
+def oldest(request):
+	tip_list=Tips.objects.all().order_by('date_added')
 	paginator=Paginator(tip_list,15)
 	page = request.GET.get('page')
 	try:
