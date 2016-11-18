@@ -1,6 +1,4 @@
 # FirstDjangoProject
 My first django project.
 Finals project in Current Programming Applications.
-# WARNING:
- spaghetti codes on HTML.
-currently studying the best practice in creating django projects.
+Create, share and discuss strategy builds in the multi-player online battle arena DOTA 2.
